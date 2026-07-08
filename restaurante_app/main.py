@@ -1,62 +1,83 @@
-from modelos.platillo import Platillo
-from modelos.bebida import Bebida
+from modelos.producto import Producto
+from modelos.cliente import Cliente
 from servicios.restaurante import Restaurante
 
+restaurante = Restaurante()
 
-# Crear restaurante
-restaurante = Restaurante("Restaurante Sabor Ecuatoriano")
+while True:
+    print("\n========================================")
+    print("        SISTEMA DE RESTAURANTE")
+    print("========================================")
+    print("1. Registrar producto")
+    print("2. Listar productos")
+    print("3. Buscar producto")
+    print("----------------------------------------")
+    print("4. Registrar cliente")
+    print("5. Listar clientes")
+    print("6. Buscar cliente")
+    print("----------------------------------------")
+    print("7. Salir")
 
+    opcion = input("Seleccione una opción: ")
 
-# Crear platillos
-platillo1 = Platillo(
-    "Encebollado",
-    6.50,
-    True,
-    "Plato fuerte"
-)
+    if opcion == "1":
+        try:
+            nombre = input("Nombre del producto: ")
+            categoria = input("Categoría: ")
+            precio = float(input("Precio: "))
+            disponible = input("¿Disponible? (si/no): ").lower() == "si"
 
-platillo2 = Platillo(
-    "Ceviche de Camarón",
-    8.25,
-    True,
-    "Mariscos"
-)
+            producto = Producto(nombre, categoria, precio, disponible)
+            restaurante.registrar_producto(producto)
 
+            print("Producto registrado correctamente.")
 
-# Crear bebidas
-bebida1 = Bebida(
-    "Limonada",
-    2.00,
-    True,
-    "Grande"
-)
+        except ValueError as e:
+            print(e)
 
-bebida2 = Bebida(
-    "Jugo de Mora",
-    2.50,
-    True,
-    "Mediano"
-)
+    elif opcion == "2":
+        restaurante.listar_productos()
 
+    elif opcion == "3":
+        nombre = input("Ingrese el nombre del producto: ")
+        producto = restaurante.buscar_producto(nombre)
 
-# Agregar productos
-restaurante.agregar_producto(platillo1)
-restaurante.agregar_producto(platillo2)
-restaurante.agregar_producto(bebida1)
-restaurante.agregar_producto(bebida2)
+        if producto:
+            print(producto.mostrar_informacion())
+        else:
+            print("Producto no encontrado.")
 
+    elif opcion == "4":
+        try:
+            id_cliente = int(input("ID del cliente: "))
+            nombre = input("Nombre: ")
+            correo = input("Correo: ")
 
-# Mostrar productos (Polimorfismo)
-restaurante.mostrar_productos()
+            cliente = Cliente(id_cliente, nombre, correo)
+            restaurante.registrar_cliente(cliente)
 
+            print("Cliente registrado correctamente.")
 
-print("\n===== PRUEBA DE ENCAPSULACIÓN =====\n")
+        except ValueError:
+            print("ID inválido.")
 
-print("Precio actual:", platillo1.obtener_precio())
+    elif opcion == "5":
+        restaurante.listar_clientes()
 
-platillo1.cambiar_precio(7.00)
+    elif opcion == "6":
+        nombre = input("Ingrese el nombre del cliente: ")
+        cliente = restaurante.buscar_cliente(nombre)
 
-print("Nuevo precio:", platillo1.obtener_precio())
+        if cliente:
+            print(f"ID: {cliente.id_cliente}")
+            print(f"Nombre: {cliente.nombre}")
+            print(f"Correo: {cliente.correo}")
+        else:
+            print("Cliente no encontrado.")
 
-# Intentar colocar un precio incorrecto
-platillo1.cambiar_precio(-3)
+    elif opcion == "7":
+        print("Gracias por usar el sistema.")
+        break
+
+    else:
+        print("Opción no válida.")

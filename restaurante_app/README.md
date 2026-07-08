@@ -1,18 +1,12 @@
 # Restaurante App
 
-## Autor
+## Nombre del estudiante
 
 Sebastián Veloz
 
-## Asignatura
-
-Programación Orientada a Objetos
-
 ## Descripción
 
-Este proyecto corresponde a la Tarea de la Semana 6 de la asignatura Programación Orientada a Objetos.
-
-El sistema representa los productos de un restaurante utilizando los principios fundamentales de la Programación Orientada a Objetos (POO): herencia, encapsulación y polimorfismo. El proyecto está organizado de forma modular para facilitar su mantenimiento y reutilización.
+Restaurante App es un sistema desarrollado en Python utilizando Programación Orientada a Objetos. El programa permite registrar, listar y buscar productos y clientes mediante un menú interactivo ejecutado desde la consola.
 
 ## Estructura del proyecto
 
@@ -22,79 +16,39 @@ restaurante_app/
 ├── modelos/
 │   ├── __init__.py
 │   ├── producto.py
-│   ├── platillo.py
-│   └── bebida.py
+│   └── cliente.py
 │
 ├── servicios/
 │   ├── __init__.py
 │   └── restaurante.py
 │
-├── main.py
-│
-└── README.md
+└── main.py
 ```
 
-## Clases implementadas
+## Constructor en la clase Producto
 
-### Producto
+La clase Producto utiliza el constructor `__init__()` para crear objetos a partir de los datos ingresados por el usuario, inicializando el nombre, la categoría, el precio y la disponibilidad.
 
-Es la clase padre del proyecto. Contiene los atributos comunes:
+## Uso de @property y @setter
 
-- Nombre
-- Precio
-- Disponibilidad
+Se utilizan los decoradores `@property` y `@setter` para controlar el acceso y la modificación de los atributos del producto. Además, se validan datos como el nombre, la categoría y el precio para evitar información incorrecta.
 
-Además, el atributo `precio` está encapsulado para proteger su acceso.
+## Uso de @dataclass
 
-### Platillo
+La clase Cliente está implementada mediante `@dataclass`, lo que simplifica la definición de sus atributos y facilita la creación de objetos.
 
-Hereda de la clase Producto y agrega el atributo:
+## Menú interactivo
 
-- Categoría
+El sistema cuenta con un menú que permite:
 
-Sobrescribe el método `mostrar_informacion()` para mostrar información específica del platillo.
-
-### Bebida
-
-Hereda de la clase Producto y agrega el atributo:
-
-- Tamaño
-
-También sobrescribe el método `mostrar_informacion()`.
-
-### Restaurante
-
-Administra una lista de productos y permite agregarlos y mostrarlos en pantalla.
-
-## Herencia
-
-Se implementó una relación de herencia donde la clase `Producto` es la clase padre y las clases `Platillo` y `Bebida` reutilizan sus atributos y métodos mediante `super()`.
-
-## Encapsulación
-
-El atributo `__precio` se encuentra encapsulado.
-
-Para acceder y modificar su valor se utilizan los métodos:
-
-- `obtener_precio()`
-- `cambiar_precio()`
-
-El método `cambiar_precio()` valida que el nuevo precio sea mayor que cero antes de actualizarlo.
-
-## Polimorfismo
-
-Las clases `Platillo` y `Bebida` sobrescriben el método `mostrar_informacion()`.
-
-Al recorrer la lista de productos del restaurante, el mismo método produce resultados diferentes dependiendo del tipo de objeto.
-
-## Ejecución
-
-Para ejecutar el proyecto:
-
-```bash
-python main.py
-```
+- Registrar productos.
+- Listar productos.
+- Buscar productos.
+- Registrar clientes.
+- Listar clientes.
+- Buscar clientes.
+- Salir del programa.
 
 ## Reflexión
 
-La Programación Orientada a Objetos permite desarrollar aplicaciones más organizadas, reutilizables y fáciles de mantener. Gracias al uso de herencia, encapsulación y polimorfismo se reduce la duplicación de código y se mejora la estructura del programa.
+Crear objetos a partir de datos ingresados por el usuario permite desarrollar aplicaciones más dinámicas y cercanas a situaciones reales. El uso de constructores, propiedades, setters y clases de datos mejora la organización del código y facilita su mantenimiento.

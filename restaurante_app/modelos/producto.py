@@ -1,30 +1,49 @@
 class Producto:
-    """
-    Clase padre que representa un producto general del restaurante.
-    """
-
-    def __init__(self, nombre, precio, disponible):
+    def __init__(self, nombre, categoria, precio, disponible):
         self.nombre = nombre
-        self.__precio = precio  # Atributo encapsulado
+        self.categoria = categoria
+        self.precio = precio
         self.disponible = disponible
 
-    # Getter
-    def obtener_precio(self):
-        return self.__precio
+    @property
+    def nombre(self):
+        return self._nombre
 
-    # Setter con validación
-    def cambiar_precio(self, nuevo_precio):
-        if nuevo_precio > 0:
-            self.__precio = nuevo_precio
-            print(f"Precio de '{self.nombre}' actualizado correctamente.")
+    @nombre.setter
+    def nombre(self, valor):
+        if valor.strip():
+            self._nombre = valor
         else:
-            print("Error: El precio debe ser mayor que cero.")
+            raise ValueError("El nombre no puede estar vacío.")
+
+    @property
+    def categoria(self):
+        return self._categoria
+
+    @categoria.setter
+    def categoria(self, valor):
+        if valor.strip():
+            self._categoria = valor
+        else:
+            raise ValueError("La categoría no puede estar vacía.")
+
+    @property
+    def precio(self):
+        return self._precio
+
+    @precio.setter
+    def precio(self, valor):
+        if valor > 0:
+            self._precio = valor
+        else:
+            raise ValueError("El precio debe ser mayor que cero.")
 
     def mostrar_informacion(self):
         estado = "Disponible" if self.disponible else "No disponible"
 
         return (
             f"Nombre: {self.nombre}\n"
-            f"Precio: ${self.__precio:.2f}\n"
+            f"Categoría: {self.categoria}\n"
+            f"Precio: ${self.precio:.2f}\n"
             f"Estado: {estado}"
         )

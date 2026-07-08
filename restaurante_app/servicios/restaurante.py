@@ -1,18 +1,45 @@
+from modelos.producto import Producto
+from modelos.cliente import Cliente
+
 class Restaurante:
-
-    def __init__(self, nombre):
-        self.nombre = nombre
+    def __init__(self):
         self.productos = []
+        self.clientes = []
 
-    def agregar_producto(self, producto):
+    # PRODUCTOS
+    def registrar_producto(self, producto):
         self.productos.append(producto)
 
-    def mostrar_productos(self):
+    def listar_productos(self):
+        if not self.productos:
+            print("No hay productos registrados.")
+        else:
+            for producto in self.productos:
+                print("----------------------------")
+                print(producto.mostrar_informacion())
 
-        print("=" * 45)
-        print(self.nombre.upper())
-        print("=" * 45)
-
+    def buscar_producto(self, nombre):
         for producto in self.productos:
-            print(producto.mostrar_informacion())
-            print("-" * 45)
+            if producto.nombre.lower() == nombre.lower():
+                return producto
+        return None
+
+    # CLIENTES
+    def registrar_cliente(self, cliente):
+        self.clientes.append(cliente)
+
+    def listar_clientes(self):
+        if not self.clientes:
+            print("No hay clientes registrados.")
+        else:
+            for cliente in self.clientes:
+                print("----------------------------")
+                print(f"ID: {cliente.id_cliente}")
+                print(f"Nombre: {cliente.nombre}")
+                print(f"Correo: {cliente.correo}")
+
+    def buscar_cliente(self, nombre):
+        for cliente in self.clientes:
+            if cliente.nombre.lower() == nombre.lower():
+                return cliente
+        return None
